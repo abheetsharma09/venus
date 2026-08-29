@@ -1,0 +1,1426 @@
+============================================================
+MASTER UI / UX DESIGN SYSTEM
+ROMANTIC EDITORIAL TACTILE
+============================================================
+
+This document defines the UNIVERSAL visual identity, UI language,
+UX philosophy, styling rules, component behavior, typography,
+color system, spacing, responsiveness, and overall aesthetic for
+the entire project.
+
+IMPORTANT:
+This is a GLOBAL DESIGN SYSTEM.
+
+Every page, screen, component, modal, form, dashboard, profile,
+authentication screen, navigation element, settings page,
+messaging interface, discovery interface, onboarding flow,
+empty state, loading state, notification, popup, and future UI
+component MUST follow this design system unless a specific
+requirement explicitly overrides it.
+
+The goal is not to make every page look identical.
+
+The goal is to make every page feel like it belongs to the
+SAME PRODUCT, SAME BRAND, AND SAME VISUAL WORLD.
+
+
+============================================================
+1. CORE DESIGN IDENTITY
+============================================================
+
+DESIGN NAME:
+Romantic Editorial Tactile
+
+CORE CONCEPT:
+
+A sophisticated modern digital interface inspired by beautifully
+printed editorial publications, aged paper, personal correspondence,
+archival design, tactile physical objects, intimate journals,
+and carefully crafted independent publications.
+
+The interface should feel:
+
+- Warm
+- Intimate
+- Human
+- Sophisticated
+- Handcrafted
+- Nostalgic
+- Premium
+- Calm
+- Trustworthy
+- Emotionally engaging
+- Distinctive
+
+The interface must combine:
+
+MODERN DIGITAL UX
++
+EDITORIAL DESIGN
++
+SUBTLE VINTAGE MATERIALITY
++
+TACTILE SKEUOMORPHISM
++
+ROMANTIC ATMOSPHERE
+
+The result should feel like:
+
+"A beautifully printed personal journal or love letter
+transformed into a modern digital product."
+
+IMPORTANT:
+
+The design is VINTAGE-INSPIRED, NOT RETRO-GAMING.
+
+It must NEVER look like:
+
+- A video game
+- An arcade interface
+- An 8-bit game
+- A pixel-art website
+- An old-fashioned unusable website
+- A generic dating application
+- A generic SaaS dashboard
+- A futuristic technology interface
+
+The underlying UX must remain modern, clean, intuitive,
+responsive, accessible, and professional.
+
+
+============================================================
+2. DESIGN PHILOSOPHY
+============================================================
+
+The visual philosophy is:
+
+EDITORIAL COMPOSITION + MODERN UX.
+
+Prioritize:
+
+- Strong visual hierarchy
+- Intentional whitespace
+- Elegant typography
+- Warm material surfaces
+- Subtle texture
+- Restrained decoration
+- Human photography
+- Clear interaction hierarchy
+- Tactile controls
+- Emotional atmosphere
+- Simplicity
+- Consistency
+
+Do not design every element as a card.
+
+Not everything needs a border.
+
+Not everything needs a shadow.
+
+Not everything needs a rounded container.
+
+Allow content to exist naturally on the main canvas.
+
+The interface should feel composed rather than assembled from
+random UI components.
+
+
+============================================================
+3. EMOTIONAL OBJECTIVE
+============================================================
+
+The product is a dating/social connection platform.
+
+The UI should encourage:
+
+- Curiosity
+- Comfort
+- Trust
+- Authenticity
+- Intimacy
+- Discovery
+- Meaningful interaction
+- Deliberate exploration
+
+The emotional progression should feel like:
+
+WARMTH
+    ↓
+COMFORT
+    ↓
+CURIOSITY
+    ↓
+DISCOVERY
+    ↓
+CONNECTION
+
+The interface should NOT psychologically communicate:
+
+- Urgency
+- Competition
+- Addiction
+- Validation chasing
+- Gamification
+- Artificial scarcity
+- Constant stimulation
+
+The experience should communicate:
+
+"Take a moment and discover someone."
+
+rather than:
+
+"Swipe faster."
+
+
+============================================================
+4. UNIVERSAL COLOR SYSTEM
+============================================================
+
+The color palette must remain consistent across the entire
+application.
+
+PRIMARY BACKGROUND:
+Warm Ivory
+#F5EFE3
+
+Use primarily for page backgrounds and large open surfaces.
+
+SECONDARY SURFACE:
+Parchment
+#EDE1CC
+
+Use for cards, panels, forms, containers, modals and elevated
+content areas.
+
+PRIMARY BRAND:
+Deep Oxblood
+#641F2A
+
+Use for:
+
+- Primary CTAs
+- Selected states
+- Important actions
+- Active navigation
+- Brand emphasis
+- Important interactive elements
+- Emotional highlights
+
+PRIMARY HOVER:
+Deep Oxblood Dark
+#501821
+
+PRIMARY TEXT:
+Dark Espresso
+#29211D
+
+Use instead of pure black.
+
+SECONDARY TEXT:
+Warm Taupe
+#74685E
+
+Use for:
+
+- Descriptions
+- Metadata
+- Supporting information
+- Secondary labels
+
+ROMANTIC SECONDARY ACCENT:
+Dusty Rose
+#B98282
+
+Use subtly for:
+
+- Romantic emphasis
+- Secondary highlights
+- Soft visual accents
+
+NATURAL SECONDARY ACCENT:
+Muted Sage
+#6F7660
+
+Use for:
+
+- Positive states
+- Compatibility indicators
+- Calm secondary emphasis
+- Natural visual balance
+
+PREMIUM MICRO ACCENT:
+Antique Gold
+#B5965A
+
+Use EXTREMELY SPARINGLY.
+
+Good uses:
+
+- Tiny decorative details
+- Editorial separators
+- Small icons
+- Special highlights
+- Subtle ornamental details
+
+Do NOT use gold as the primary button color.
+
+Do NOT overuse gold.
+
+GENERAL COLOR RATIO:
+
+Approximately:
+
+70% Warm Ivory / Parchment
+15% Espresso
+8% Oxblood
+4% Sage / Dusty Rose
+3% Antique Gold
+
+The application should NOT become a red, pink, or gold interface.
+
+Oxblood is an accent, not the entire background.
+
+
+============================================================
+5. COLOR PSYCHOLOGY
+============================================================
+
+WARM IVORY:
+
+Creates:
+
+- Comfort
+- Calm
+- Human warmth
+- Approachability
+
+OXBLOOD:
+
+Creates:
+
+- Romantic sophistication
+- Emotional depth
+- Maturity
+- Distinctiveness
+
+ESPRESSO:
+
+Creates:
+
+- Stability
+- Trust
+- Readability
+- Organic warmth
+
+DUSTY ROSE:
+
+Creates:
+
+- Softness
+- Emotional warmth
+- Subtle romance
+
+MUTED SAGE:
+
+Creates:
+
+- Calm
+- Natural balance
+- Freshness
+- Breathing room
+
+ANTIQUE GOLD:
+
+Creates:
+
+- Premium feeling
+- Rarity
+- Craftsmanship
+
+Use all psychological effects subtly.
+
+Never manipulate the user.
+
+
+============================================================
+6. MATERIAL LANGUAGE
+============================================================
+
+The interface should have subtle physical materiality.
+
+Preferred material references:
+
+- Aged paper
+- Parchment
+- Matte paper
+- Editorial print
+- Ink
+- Personal journals
+- Archival documents
+- Physical stationery
+- Carefully crafted printed material
+
+SURFACES SHOULD FEEL:
+
+- Matte
+- Warm
+- Slightly textured
+- Physical
+- Natural
+
+Use subtle paper grain/noise.
+
+Texture must remain LOW CONTRAST.
+
+The user should feel the texture before consciously noticing it.
+
+Never use excessive noise or obvious artificial grain.
+
+
+============================================================
+7. BORDERS
+============================================================
+
+Borders should feel like:
+
+INK
+PRINT
+CRAFT
+PHYSICAL EDGES
+
+rather than generic corporate UI borders.
+
+Primary border color:
+
+#4A3830
+
+Prefer dark espresso/brown over pure black.
+
+Borders can be:
+
+- 1px for subtle structure
+- 2px for stronger tactile components
+
+Avoid making every component heavily outlined.
+
+Use stronger borders only where hierarchy requires them.
+
+
+============================================================
+8. SHADOWS AND DEPTH
+============================================================
+
+Use restrained tactile shadows.
+
+The visual concept is:
+
+"An object sitting naturally on paper."
+
+NOT:
+
+"A floating futuristic glass card."
+
+Shadows should be:
+
+- Soft
+- Subtle
+- Warm
+- Close to the component
+- Low contrast
+
+Avoid:
+
+- Huge shadows
+- Neon glows
+- Floating 3D effects
+- Excessive elevation
+
+Depth should come from:
+
+- Material contrast
+- Borders
+- Small shadows
+- Surface changes
+- Typography
+- Spacing
+
+
+============================================================
+9. CORNER RADIUS
+============================================================
+
+Use moderate corner rounding.
+
+Preferred range:
+
+8px - 14px
+
+Use different radii according to component type.
+
+Avoid:
+
+- Giant rounded rectangles
+- Excessive pill shapes
+- Everything having identical rounded corners
+
+Buttons, inputs and cards should feel structured rather than
+bubble-like.
+
+
+============================================================
+10. TYPOGRAPHY SYSTEM
+============================================================
+
+Typography is a CORE part of the brand identity.
+
+Use two primary typographic personalities.
+
+EDITORIAL FONT:
+
+Elegant serif.
+
+Possible font families:
+
+- Cormorant Garamond
+- DM Serif Display
+- Playfair Display
+- Similar sophisticated editorial serif
+
+Use for:
+
+- Page titles
+- Hero headings
+- Profile names
+- Emotional statements
+- Major section headings
+- Important editorial content
+
+FUNCTIONAL FONT:
+
+Clean modern sans-serif.
+
+Possible font families:
+
+- Inter
+- Manrope
+- DM Sans
+- Similar highly readable sans-serif
+
+Use for:
+
+- Navigation
+- Labels
+- Buttons
+- Form fields
+- Descriptions
+- Metadata
+- Functional UI
+- Body text
+
+Typography should create:
+
+EDITORIAL PERSONALITY
++
+MODERN READABILITY
+
+Do NOT use pixel fonts.
+
+Do NOT use arcade fonts.
+
+Do NOT make all text decorative.
+
+Body text must remain highly readable.
+
+
+============================================================
+11. TYPOGRAPHIC HIERARCHY
+============================================================
+
+Headings:
+
+Elegant, expressive, editorial.
+
+Body:
+
+Clean, comfortable, readable.
+
+Metadata:
+
+Small, restrained, functional.
+
+Important actions:
+
+Clear and visually identifiable.
+
+Avoid excessive capitalization.
+
+Use uppercase only when it contributes to hierarchy.
+
+Do not make the entire interface look like a poster.
+
+
+============================================================
+12. LAYOUT SYSTEM
+============================================================
+
+The layout must feel editorial and intentional.
+
+Use:
+
+- Generous whitespace
+- Strong alignment
+- Clear vertical rhythm
+- Comfortable margins
+- Deliberate asymmetry where appropriate
+- Structured sections
+- Balanced content density
+
+Avoid:
+
+- Crowded layouts
+- Random spacing
+- Excessive cards
+- Excessive columns
+- Every section being boxed
+
+Whitespace is a major part of the aesthetic.
+
+Do not fill empty space simply because it exists.
+
+
+============================================================
+13. GRID AND SPACING
+============================================================
+
+Use a consistent spacing system.
+
+Prefer predictable spacing increments.
+
+Example:
+
+4px
+8px
+12px
+16px
+24px
+32px
+48px
+64px
+80px
+
+Use larger spacing for:
+
+- Page sections
+- Hero areas
+- Editorial transitions
+
+Use smaller spacing for:
+
+- Form groups
+- Metadata
+- Component internals
+
+Spacing should create rhythm.
+
+Avoid arbitrary spacing values unless necessary.
+
+
+============================================================
+14. CARDS AND PANELS
+============================================================
+
+Cards should feel like physical editorial objects.
+
+Use:
+
+- Parchment surfaces
+- Subtle texture
+- Espresso borders
+- Restrained shadows
+- Moderate radius
+- Strong internal spacing
+
+Cards should NOT dominate every page.
+
+Use cards when grouping information actually improves comprehension.
+
+Some content should simply sit on the ivory canvas without a card.
+
+This distinction is important for maintaining sophistication.
+
+
+============================================================
+15. BUTTON SYSTEM
+============================================================
+
+PRIMARY BUTTON:
+
+Deep Oxblood
+#641F2A
+
+Text:
+
+Warm Ivory
+
+Button characteristics:
+
+- Moderate radius
+- Dark subtle border
+- Slight tactile shadow
+- Subtle hover elevation
+- Slight pressed state
+- Clear focus state
+
+The button should feel:
+
+TACTILE + PREMIUM + MODERN
+
+not:
+
+GAME-LIKE.
+
+SECONDARY BUTTON:
+
+Warm Ivory / Parchment
+
+with:
+
+Espresso border
+Espresso text
+
+TERTIARY BUTTON:
+
+Mostly text-based with restrained color emphasis.
+
+Avoid making every action visually dominant.
+
+BUTTON LANGUAGE:
+
+Primary action = visually strongest
+
+Secondary action = quieter
+
+Tertiary action = subtle
+
+
+============================================================
+16. INPUT SYSTEM
+============================================================
+
+Inputs should feel like beautifully designed physical forms
+translated into a digital interface.
+
+Use:
+
+- Parchment/cream surfaces
+- Espresso text
+- Ink-like border
+- Clear labels
+- Comfortable height
+- Moderate radius
+- Generous internal padding
+
+FOCUS STATE:
+
+Use subtle oxblood border/focus ring.
+
+Do not use:
+
+- Neon glow
+- Bright blue default browser styling
+- Excessive animation
+- Pill-shaped inputs
+
+ERROR STATE:
+
+Clearly visible but visually integrated into the palette.
+
+SUCCESS STATE:
+
+Muted sage should be preferred over bright green.
+
+
+============================================================
+17. PHOTOGRAPHY SYSTEM
+============================================================
+
+Photography is one of the strongest emotional elements.
+
+Profile photography should feel:
+
+- Natural
+- Human
+- Editorial
+- Authentic
+- Warm
+- Sophisticated
+
+Avoid excessive filters.
+
+Avoid artificial hyper-saturation.
+
+Avoid making every image look identical.
+
+Use thoughtful cropping.
+
+Photography can be presented with subtle editorial framing,
+rather than generic dating-app thumbnails.
+
+Images should remain the emotional focal point when appropriate.
+
+
+============================================================
+18. ICONOGRAPHY
+============================================================
+
+Icons should be:
+
+- Simple
+- Elegant
+- Consistent
+- Restrained
+- Easy to understand
+
+Prefer a coherent icon family.
+
+Do not mix random icon styles.
+
+Avoid excessive emoji usage as interface elements.
+
+Romantic symbols such as hearts can exist, but should be used
+sparingly and intentionally.
+
+The brand should communicate romance through the WHOLE DESIGN,
+not by placing hearts everywhere.
+
+
+============================================================
+19. DECORATIVE ELEMENTS
+============================================================
+
+Decoration should be subtle.
+
+Good decorative elements:
+
+- Thin editorial rules
+- Small antique-gold ornaments
+- Fine line illustrations
+- Subtle botanical forms
+- Small typographic marks
+- Paper texture
+- Minimal archival details
+
+Avoid:
+
+- Floating hearts
+- Excessive flowers
+- Giant romantic illustrations
+- Sparkles everywhere
+- Emoji decoration
+- Decorative clutter
+
+The interface should feel designed, not decorated.
+
+
+============================================================
+20. NAVIGATION
+============================================================
+
+Navigation must remain modern and extremely usable.
+
+However, its styling should follow the editorial tactile identity.
+
+Use:
+
+- Ivory/parchment surfaces
+- Espresso typography
+- Oxblood active state
+- Subtle separators
+- Clear hierarchy
+- Generous spacing
+
+Navigation should never become visually heavier than the content.
+
+Active navigation should be immediately recognizable.
+
+Use Oxblood strategically.
+
+
+============================================================
+21. PROFILE DESIGN
+============================================================
+
+Profiles should feel like PERSONAL EDITORIAL PAGES.
+
+The goal is to shift the user's mindset from:
+
+"I'm browsing dating cards."
+
+to:
+
+"I'm discovering a person."
+
+Profile pages may include:
+
+- Large portrait
+- Name
+- Age
+- Location
+- Short biography
+- Interests
+- Values
+- Lifestyle
+- What they are looking for
+- Compatibility information
+- Meaningful prompts
+- Connection actions
+
+Use elegant typography and generous whitespace.
+
+Avoid making profiles feel like product listings.
+
+
+============================================================
+22. DISCOVERY / MATCHING DESIGN
+============================================================
+
+Discovery should prioritize:
+
+- Curiosity
+- Context
+- Personality
+- Authenticity
+
+Avoid making the entire experience feel like an endless
+high-speed swipe machine.
+
+Use photography and meaningful information.
+
+Important actions should remain obvious but not aggressive.
+
+Primary connection actions use Oxblood.
+
+Secondary actions remain visually quieter.
+
+The UI should encourage users to look at the PERSON rather
+than simply evaluate a card.
+
+
+============================================================
+23. MESSAGING DESIGN
+============================================================
+
+Messaging should feel:
+
+- Personal
+- Calm
+- Warm
+- Intimate
+- Comfortable
+
+Do not make the chat interface excessively decorative.
+
+Use the established palette and tactile surfaces.
+
+Message bubbles should not become giant colorful pills.
+
+Conversation should remain the primary focus.
+
+Use typography and whitespace to create emotional comfort.
+
+
+============================================================
+24. FORMS
+============================================================
+
+Forms must follow the same tactile editorial language.
+
+Use:
+
+- Clear labels
+- Comfortable spacing
+- Parchment inputs
+- Espresso text
+- Oxblood focus states
+- Muted sage success states
+- Clear validation
+
+Do not sacrifice usability for visual style.
+
+Forms should feel like:
+
+"Beautifully designed paper forms made interactive."
+
+
+============================================================
+25. MODALS
+============================================================
+
+Modals should feel like physical editorial panels.
+
+Use:
+
+- Parchment surface
+- Espresso border
+- Subtle shadow
+- Moderate radius
+- Strong heading hierarchy
+- Clear primary action
+- Clear secondary action
+
+Background overlay should be subtle and not overly dramatic.
+
+The modal should remain visually connected to the underlying
+page rather than looking like an unrelated component.
+
+
+============================================================
+26. LOADING STATES
+============================================================
+
+Loading states should preserve the material language.
+
+Avoid generic futuristic skeletons.
+
+Use subtle:
+
+- Parchment placeholders
+- Soft shimmer only if appropriate
+- Editorial loading marks
+- Restrained motion
+
+Animation should communicate progress, not entertainment.
+
+
+============================================================
+27. EMPTY STATES
+============================================================
+
+Empty states should feel human.
+
+Use:
+
+- Elegant typography
+- Small illustration if appropriate
+- Warm explanatory copy
+- One clear action
+
+Avoid:
+
+- Giant cartoon graphics
+- Excessive emojis
+- Generic SaaS illustrations
+
+Empty states are an opportunity to reinforce the brand personality.
+
+
+============================================================
+28. ANIMATION AND INTERACTION
+============================================================
+
+Motion should be:
+
+- Subtle
+- Smooth
+- Intentional
+- Fast enough to remain responsive
+- Emotionally appropriate
+
+Good examples:
+
+- Small button movement
+- Subtle elevation
+- Gentle fade
+- Soft page transition
+- Image reveal
+- Tactile pressed state
+
+Avoid:
+
+- Excessive bouncing
+- Constant floating animations
+- Large parallax effects
+- Flashing
+- Particle effects
+- Gamification
+- Attention-grabbing animation everywhere
+
+Motion should support the interface rather than compete with it.
+
+
+============================================================
+29. RESPONSIVE DESIGN
+============================================================
+
+The design system MUST work across:
+
+- Large desktop
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+Responsive design is NOT simply shrinking desktop content.
+
+Desktop:
+
+Use editorial composition, whitespace and multiple content
+relationships.
+
+Tablet:
+
+Reduce density and simplify secondary visual elements.
+
+Mobile:
+
+Prioritize:
+
+- Content
+- Readability
+- Touch interaction
+- Vertical rhythm
+- Clear navigation
+- Comfortable spacing
+
+Use full-width controls where appropriate.
+
+Ensure:
+
+- No horizontal scrolling
+- Comfortable touch targets
+- Readable typography
+- Proper image scaling
+- Proper navigation behavior
+- Proper modal behavior
+
+Decorative elements may be reduced on smaller screens while
+maintaining the core visual identity.
+
+
+============================================================
+30. ACCESSIBILITY
+============================================================
+
+Aesthetic quality must NEVER compromise accessibility.
+
+Maintain:
+
+- Strong text contrast
+- Visible keyboard focus
+- Semantic HTML
+- Accessible labels
+- Appropriate touch target sizes
+- Clear error states
+- Screen-reader-friendly structure
+- Logical keyboard navigation
+- Reduced-motion consideration
+
+Accessibility is part of the design system.
+
+
+============================================================
+31. RESPONSIVE TYPOGRAPHY
+============================================================
+
+Typography should scale naturally.
+
+Large editorial headings may become smaller on mobile,
+but must retain their personality.
+
+Avoid:
+
+- Text overflowing
+- Excessive line lengths
+- Tiny mobile text
+- Giant mobile headings that dominate the screen
+
+Maintain comfortable reading widths.
+
+
+============================================================
+32. BRAND CONSISTENCY
+============================================================
+
+Every new component must answer:
+
+1. Does it use the established color system?
+2. Does its typography belong to the established system?
+3. Does its spacing feel consistent?
+4. Does its border treatment feel tactile/editorial?
+5. Does its shadow treatment remain restrained?
+6. Does it preserve the warm material feeling?
+7. Does it feel modern rather than retro-gaming?
+8. Does it feel like the SAME PRODUCT?
+9. Does it improve usability?
+10. Is the visual hierarchy intentional?
+
+If the answer is NO to several of these questions,
+redesign the component.
+
+
+============================================================
+33. PROFESSIONALISM RULE
+============================================================
+
+The interface should always prioritize:
+
+PROFESSIONAL
+OVER
+DECORATIVE
+
+SOPHISTICATED
+OVER
+FLASHY
+
+HUMAN
+OVER
+CORPORATE
+
+DISTINCTIVE
+OVER
+TRENDY
+
+INTIMATE
+OVER
+LOUD
+
+MODERN UX
+OVER
+NOSTALGIC NOVELTY
+
+
+============================================================
+34. STRICTLY AVOID
+============================================================
+
+NEVER introduce these styles unless explicitly requested:
+
+- Video game UI
+- RPG UI
+- Arcade UI
+- Pixel art
+- 8-bit graphics
+- 16-bit graphics
+- CRT effects
+- Neon
+- Cyberpunk
+- Futuristic holograms
+- Glassmorphism
+- Excessive gradients
+- Bright Tinder-like red
+- Excessive pink
+- Excessive purple
+- Excessive gold
+- Giant heart graphics
+- Floating hearts
+- Excessive flowers
+- Excessive sparkles
+- Excessive emojis
+- Giant pill buttons
+- Giant pill inputs
+- Excessive rounded cards
+- Excessive shadows
+- Excessive animations
+- Generic SaaS cards
+- Generic dashboard templates
+- Generic bootstrap styling
+- Sterile white interfaces
+- Random colors
+- Random typography
+- Inconsistent icon styles
+
+
+============================================================
+35. DESIGN DECISION PRIORITY
+============================================================
+
+When two design decisions conflict, follow this hierarchy:
+
+1. USABILITY
+2. ACCESSIBILITY
+3. CLARITY
+4. BRAND CONSISTENCY
+5. VISUAL HIERARCHY
+6. EMOTIONAL ATMOSPHERE
+7. DECORATIVE DETAIL
+
+Never sacrifice usability for decoration.
+
+Never sacrifice accessibility for aesthetics.
+
+Never add visual effects simply because they look impressive.
+
+
+============================================================
+36. UNIVERSAL PAGE RULE
+============================================================
+
+When creating ANY new page:
+
+FIRST:
+Understand the purpose of the page.
+
+SECOND:
+Create the appropriate modern UX structure.
+
+THIRD:
+Apply the Romantic Editorial Tactile design system.
+
+FOURTH:
+Use the established color palette.
+
+FIFTH:
+Use the established typography.
+
+SIXTH:
+Apply the established material, border and shadow language.
+
+SEVENTH:
+Check responsive behavior.
+
+EIGHTH:
+Check accessibility.
+
+NINTH:
+Remove unnecessary decoration.
+
+The page should feel unique in CONTENT and LAYOUT,
+but consistent in VISUAL LANGUAGE.
+
+
+============================================================
+37. CORE VISUAL KEYWORDS
+============================================================
+
+When generating future UI, always keep these concepts in mind:
+
+ROMANTIC
+EDITORIAL
+TACTILE
+VINTAGE-INSPIRED
+SOPHISTICATED
+WARM
+INTIMATE
+HUMAN
+PREMIUM
+HANDCRAFTED
+ARCHIVAL
+PARCHMENT
+MATTE
+PAPER GRAIN
+INK
+OXBLOOD
+ESPRESSO
+IVORY
+MUTED SAGE
+DUSTY ROSE
+ANTIQUE GOLD
+ELEGANT SERIF
+MODERN SANS-SERIF
+EDITORIAL WHITESPACE
+RESTRAINED SHADOWS
+PHYSICAL MATERIALITY
+MODERN UX
+
+
+============================================================
+38. MASTER DESIGN STATEMENT
+============================================================
+
+The entire product should feel like:
+
+"A beautifully printed personal journal, an intimate editorial
+publication, and a carefully crafted modern digital product
+existing in the same visual world."
+
+It should feel:
+
+OLD IN MATERIAL
+MODERN IN EXPERIENCE
+
+ROMANTIC IN ATMOSPHERE
+PROFESSIONAL IN EXECUTION
+
+HANDCRAFTED IN DETAIL
+CLEAN IN UX
+
+NOSTALGIC IN CHARACTER
+CONTEMPORARY IN USABILITY
+
+
+============================================================
+39. MASTER PROMPT FOR FUTURE AI GENERATION
+============================================================
+
+Whenever creating a new page, component, or feature, use the
+following instruction:
+
+"Follow the project's established Romantic Editorial Tactile
+design system exactly. Create a sophisticated modern interface
+inspired by beautifully printed editorial publications, aged
+paper, personal correspondence, archival design, and tactile
+physical objects.
+
+Use the established warm ivory and parchment foundation, deep
+oxblood primary accent, dark espresso typography and borders,
+muted dusty rose and sage secondary accents, and extremely
+restrained antique-gold details.
+
+Use subtle paper grain, matte surfaces, ink-like borders,
+restrained warm shadows, tactile physical controls, elegant
+editorial serif typography paired with a clean modern sans-serif,
+generous whitespace, strong editorial hierarchy, sophisticated
+photography, deliberate composition, and modern responsive UX.
+
+The result must feel intimate, human, handcrafted, nostalgic,
+premium, distinctive, and emotionally warm while remaining
+professional, accessible, responsive, and highly usable.
+
+Maintain consistency with all existing pages and components.
+
+The design must feel vintage-inspired but NEVER retro-gaming.
+
+Do NOT introduce pixel art, arcade aesthetics, game UI, CRT
+effects, neon colors, glassmorphism, futuristic gradients,
+excessive pink, excessive hearts, excessive rounded pills,
+excessive cards, excessive shadows, excessive animations, or
+generic SaaS styling.
+
+The visual identity must remain consistent even when the page
+layout and functionality change.
+
+Design the page as part of an established professional product,
+not as an isolated concept or template."
+
+
+============================================================
+40. FINAL RULE
+============================================================
+
+DO NOT REINVENT THE DESIGN SYSTEM FOR EACH PAGE.
+
+New pages should introduce:
+
+NEW INFORMATION
+NEW CONTENT
+NEW INTERACTION
+NEW LAYOUT
+
+but NOT:
+
+NEW COLORS
+NEW TYPOGRAPHY
+NEW VISUAL LANGUAGE
+NEW BORDER LANGUAGE
+NEW SHADOW LANGUAGE
+NEW BUTTON LANGUAGE
+NEW MATERIAL LANGUAGE
+
+The product should evolve in functionality while remaining
+visually recognizable as ONE coherent brand.
+
+
+============================================================
+END OF MASTER DESIGN SYSTEM
+============================================================
