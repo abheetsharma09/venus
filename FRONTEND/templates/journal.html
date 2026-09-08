@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venus · Journal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================================
+           ROOT VARIABLES — DARK TECH HACKER (DEFAULT)
+           ============================================================ */
+        :root {
+            --bg-void: #0F0D0B;
+            --bg-surface: #1A1612;
+            --bg-elevated: #29211D;
+            --ivory: #F5EFE3;
+            --text-muted: #9A8E82;
+            --oxblood: #641F2A;
+            --oxblood-hover: #8B3344;
+            --oxblood-glow: rgba(139, 51, 68, 0.4);
+            --oxblood-soft: rgba(139, 51, 68, 0.1);
+            --gold: #B5965A;
+            --gold-glow: rgba(181, 150, 90, 0.3);
+            --gold-soft: rgba(181, 150, 90, 0.05);
+            --muted-rose: #B98282;
+            --muted-sage: #8A9176;
+            --border-subtle: rgba(245, 239, 227, 0.08);
+            --border-soft: rgba(245, 239, 227, 0.15);
+            --border-input: #4A3830;
+            --shadow: transparent;
+            --shadow-strong: transparent;
+            --font-serif: 'DM Serif Display', 'Georgia', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+            --transition: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --sidebar-width: 240px;
+            --notes-list-width: 300px;
+            --header-height: 68px;
+            --grid-color: rgba(181, 150, 90, 0.03);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-full: 9999px;
+        }
+
+        /* ============================================================
+           ROOT VARIABLES — LIGHT (EXACT ORIGINAL JOURNAL) OVERRIDES
+           ============================================================ */
+        html.light {
+            --bg-void: #F5EFE3;             /* ivory */
+            --bg-surface: #F4EDDF;         /* parchment-light */
+            --bg-elevated: #FCF8F0;         /* cream */
+            --ivory: #29211D;              /* espresso (Main Text) */
+            --text-muted: #74685E;         /* text-secondary */
+            --oxblood: #641F2A;
+            --oxblood-hover: #501821;
+            --oxblood-glow: rgba(100, 31, 42, 0.12);
+            --oxblood-soft: rgba(100, 31, 42, 0.08);
+            --gold: #B5965A;
+            --gold-glow: rgba(181, 150, 90, 0.2);
+            --gold-soft: rgba(181, 150, 90, 0.12);
+            --muted-rose: #B98282;
+            --muted-sage: #6F7660;
+            --border-subtle: rgba(74, 56, 48, 0.06);
+            --border-soft: rgba(74, 56, 48, 0.12);
+            --border-input: rgba(74, 56, 48, 0.12);
+            --shadow: rgba(41, 33, 29, 0.06);
+            --shadow-strong: rgba(41, 33, 29, 0.10);
+            --grid-color: transparent; /* Turn off dark grid */
+        }
+
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ivory);
+            background: var(--bg-void);
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            min-height: 100vh;
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Restore exact light mode background textures */
+        html.light body {
+            background-image: 
+                radial-gradient(circle at 30% 20%, rgba(181, 150, 90, 0.03) 0%, transparent 60%),
+                repeating-linear-gradient(45deg, rgba(120, 100, 80, 0.015) 0px, rgba(120, 100, 80, 0.015) 2px, transparent 2px, transparent 6px);
+            background-size: auto;
+        }
+
+        .dashboard { display: flex; min-height: 100vh; max-width: 1440px; margin: 0 auto; position: relative; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { width: var(--sidebar-width); flex-shrink: 0; background: var(--bg-surface); border-right: 1px solid var(--border-soft); padding: 2rem 1.2rem; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 10; transition: transform var(--transition), width var(--transition), background 0.3s, border-color 0.3s; }
+        
+        /* Restore light mode sidebar texture */
+        html.light .sidebar {
+            background-image: linear-gradient(180deg, #F4EDDF 0%, #EDE1CC 100%), repeating-linear-gradient(45deg, rgba(160, 140, 110, 0.02) 0px, rgba(160, 140, 110, 0.02) 2px, transparent 2px, transparent 6px);
+            background-blend-mode: overlay, normal;
+        }
+
+        .sidebar-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
+        .sidebar-brand { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-soft); }
+        .sidebar-brand .logo { font-family: var(--font-serif); font-size: 1.8rem; color: var(--ivory); letter-spacing: 0.05em; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .sidebar-brand .logo .mark { color: var(--gold); font-size: 1.2rem; text-shadow: 0 0 10px var(--gold-glow); }
+        .sidebar-brand .logo .logo-text { display: inline-block; }
+        .sidebar-brand .logo-sub { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-top: 0.3rem; opacity: 0.6; }
+
+        .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 0.25rem; }
+        .sidebar-nav .nav-label { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); opacity: 0.4; padding: 0.6rem 0.8rem 0.4rem; }
+        .sidebar-nav a { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.8rem; border-radius: var(--radius-sm); text-decoration: none; color: var(--text-muted); font-size: 0.85rem; transition: all var(--transition); position: relative; }
+        .sidebar-nav a .nav-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity var(--transition); }
+        .sidebar-nav a .nav-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 2; }
+        .sidebar-nav a:hover { color: var(--ivory); background: var(--oxblood-soft); }
+        .sidebar-nav a:hover .nav-icon { opacity: 1; color: var(--oxblood-hover); }
+        .sidebar-nav a.active { color: var(--oxblood); background: var(--oxblood-soft); font-weight: 500; }
+        .sidebar-nav a.active .nav-icon { opacity: 1; color: var(--oxblood); }
+        .sidebar-nav a.active::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 3px; background: var(--oxblood); border-radius: 4px 0 0 4px; box-shadow: 0 0 8px var(--oxblood-glow); }
+        .sidebar-nav .nav-badge { margin-left: auto; font-family: var(--font-mono); font-size: 0.55rem; background: var(--oxblood); color: var(--bg-void); padding: 0.15rem 0.5rem; border-radius: var(--radius-full); box-shadow: 0 0 8px var(--oxblood-glow); font-weight: 600; }
+
+        .sidebar-footer { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--border-soft); display: flex; flex-direction: column; gap: 0.25rem; }
+        .sidebar-footer a { display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); text-decoration: none; color: var(--text-muted); font-size: 0.8rem; transition: all var(--transition); }
+        .sidebar-footer a:hover { color: var(--ivory); background: var(--oxblood-soft); }
+        .sidebar-footer a svg { width: 18px; height: 18px; opacity: 0.6; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--bg-void); position: relative; height: 100vh; overflow: hidden; transition: background 0.3s; }
+
+        /* ===== TOP HEADER ===== */
+        .top-header { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2rem; border-bottom: 1px solid var(--border-soft); flex-shrink: 0; background: var(--bg-void); z-index: 5; backdrop-filter: blur(12px); gap: 1rem; flex-wrap: wrap; min-height: var(--header-height); transition: background 0.3s, border-color 0.3s; }
+        
+        html.light .top-header { background: rgba(245, 239, 227, 0.92); border-bottom-color: var(--border-soft); }
+
+        .top-header .header-left { display: flex; align-items: center; gap: 1.5rem; }
+        .top-header .header-left .menu-toggle { display: none; background: none; border: 1px solid var(--border-soft); font-size: 1.2rem; cursor: pointer; color: var(--ivory); padding: 0.2rem 0.6rem; border-radius: var(--radius-sm); transition: all var(--transition); }
+        .top-header .header-left .menu-toggle:hover { border-color: var(--oxblood); color: var(--oxblood); background: var(--oxblood-soft); }
+        .top-header .header-left .page-title { font-family: var(--font-serif); font-size: 1.4rem; color: var(--ivory); }
+        .top-header .header-left .page-title .sub { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-left: 0.5rem; text-transform: lowercase; opacity: 0.6; }
+        .top-header .header-right { display: flex; align-items: center; gap: 1.5rem; position: relative; }
+
+        .utility-btn { background: none; border: 1px solid transparent; cursor: pointer; color: var(--text-muted); padding: 0.5rem; border-radius: var(--radius-sm); transition: all var(--transition); position: relative; display: flex; align-items: center; justify-content: center; }
+        .utility-btn svg { width: 20px; height: 20px; }
+        .utility-btn:hover { color: var(--oxblood); border-color: var(--border-soft); background: var(--oxblood-soft); }
+        .utility-btn .dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background: var(--oxblood-hover); border-radius: 50%; box-shadow: 0 0 8px var(--oxblood-glow); border: 2px solid var(--bg-void); }
+
+        /* ===== NOTIFICATION DROPDOWN ===== */
+        .notif-wrapper { position: relative; }
+        .notif-dropdown { position: absolute; top: calc(100% + 15px); right: 0; width: 340px; background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: 0 12px 40px var(--shadow-strong), 0 0 15px var(--gold-glow); z-index: 20; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; overflow: hidden; }
+        .notif-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        html.light .notif-dropdown { background: #FCF8F0; box-shadow: 0 12px 40px var(--shadow-strong); border-color: var(--border-soft); }
+        html.light .notif-dropdown::before { background: #FCF8F0; border-color: var(--border-soft); }
+        
+        .notif-dropdown::before { content: ''; position: absolute; top: -6px; right: 18px; width: 12px; height: 12px; background: var(--bg-surface); border-left: 1px solid var(--border-soft); border-top: 1px solid var(--border-soft); transform: rotate(45deg); }
+        .notif-header { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; }
+        .notif-header h4 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ivory); }
+        .notif-header .mark-all { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); cursor: pointer; background: none; border: none; }
+        .notif-list { max-height: 320px; overflow-y: auto; }
+        .notif-item { padding: 1rem 1.2rem; display: flex; gap: 0.8rem; border-bottom: 1px solid var(--border-subtle); cursor: pointer; transition: background 0.2s; position: relative; }
+        .notif-item:hover { background: var(--bg-elevated); }
+        .notif-item.unread::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 60%; background: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+        .notif-item .notif-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-elevated); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--border-soft); }
+        .notif-item .notif-icon svg { width: 16px; height: 16px; color: var(--muted-rose); }
+        .notif-item .notif-content { flex: 1; }
+        .notif-item .notif-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+        .notif-item .notif-text strong { font-family: var(--font-serif); font-weight: 400; color: var(--ivory); font-size: 0.9rem; }
+        .notif-item .notif-time { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); opacity: 0.6; text-transform: uppercase; margin-top: 0.3rem; }
+        .notif-footer { padding: 0.8rem 1.2rem; text-align: center; border-top: 1px solid var(--border-subtle); }
+        .notif-footer a { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--oxblood); text-decoration: none; }
+        .notif-footer a:hover { text-shadow: 0 0 8px var(--oxblood-glow); }
+
+        /* Theme Toggle */
+        .theme-toggle { display: flex; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-soft); border-radius: var(--radius-full); padding: 2px; cursor: pointer; transition: all 0.2s; }
+        .theme-toggle:hover { border-color: var(--gold); }
+        .theme-toggle .toggle-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
+        .theme-toggle .toggle-icon.active { background: var(--oxblood); color: var(--bg-void); box-shadow: 0 0 10px var(--oxblood-glow); }
+        .theme-toggle .toggle-icon svg { width: 14px; height: 14px; }
+
+        .profile-avatar { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; padding: 0.3rem 0.8rem 0.3rem 0.3rem; border-radius: var(--radius-full); transition: background var(--transition); text-decoration: none; border: 1px solid transparent; }
+        .profile-avatar:hover { background: var(--oxblood-soft); }
+        .profile-avatar .avatar-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg-elevated); box-shadow: 0 2px 8px var(--shadow); transition: border-color var(--transition); }
+        .profile-avatar:hover .avatar-img { border-color: var(--gold); }
+        .profile-avatar .avatar-name { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ivory); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* ===== JOURNAL WORKSPACE ===== */
+        .journal-workspace { display: flex; flex: 1; min-height: 0; position: relative; }
+
+        /* ===== NOTES LIST PANEL ===== */
+        .notes-list-panel { width: var(--notes-list-width); flex-shrink: 0; border-right: 1px solid var(--border-soft); background: var(--bg-surface); display: flex; flex-direction: column; overflow: hidden; transition: width var(--transition), transform var(--transition), background 0.3s; }
+        
+        html.light .notes-list-panel { background-image: repeating-linear-gradient(45deg, rgba(160, 140, 110, 0.015) 0px, rgba(160, 140, 110, 0.015) 2px, transparent 2px, transparent 6px); }
+
+        .notes-list-panel .notes-toolbar { padding: 1.2rem 1.2rem 1rem 1.2rem; border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; display: flex; flex-direction: column; gap: 0.8rem; }
+        .notes-list-panel .notes-toolbar .search-wrapper { position: relative; }
+        .notes-list-panel .notes-toolbar .search-wrapper input { width: 100%; padding: 0.6rem 0.8rem 0.6rem 2.4rem; font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg-void); border: 1.5px solid var(--border-input); border-radius: var(--radius-sm); color: var(--ivory); outline: none; transition: all var(--transition); }
+        .notes-list-panel .notes-toolbar .search-wrapper input::placeholder { color: var(--text-muted); opacity: 0.6; }
+        .notes-list-panel .notes-toolbar .search-wrapper input:focus { border-color: var(--oxblood); box-shadow: 0 0 0 3px var(--oxblood-glow); }
+        .notes-list-panel .notes-toolbar .search-wrapper .search-icon { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-muted); opacity: 0.5; pointer-events: none; }
+        
+        .notes-list-panel .notes-toolbar .filter-row { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
+        .notes-list-panel .notes-toolbar .filter-row .filter-chip { padding: 0.3rem 0.8rem; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border-soft); border-radius: var(--radius-full); background: transparent; color: var(--text-muted); cursor: pointer; transition: all var(--transition); }
+        .notes-list-panel .notes-toolbar .filter-row .filter-chip:hover { background: var(--oxblood-soft); border-color: var(--oxblood); color: var(--oxblood); }
+        .notes-list-panel .notes-toolbar .filter-row .filter-chip.active { background: var(--oxblood); border-color: var(--oxblood); color: var(--bg-void); }
+        .notes-list-panel .notes-toolbar .filter-row .filter-chip.new-note-btn { background: var(--gold); border-color: var(--gold); color: var(--bg-void); font-weight: 600; padding: 0.3rem 1rem; display: flex; align-items: center; gap: 0.3rem; margin-left: auto; }
+        .notes-list-panel .notes-toolbar .filter-row .filter-chip.new-note-btn:hover { background: var(--ivory); border-color: var(--ivory); }
+        .notes-list-panel .notes-toolbar .filter-row .filter-chip.new-note-btn svg { width: 12px; height: 12px; stroke-width: 3; }
+
+        .notes-list-panel .notes-list { flex: 1; overflow-y: auto; padding: 0.8rem; }
+        .notes-list-panel .notes-list .note-item { padding: 0.8rem 1rem; border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; transition: all var(--transition); margin-bottom: 0.4rem; position: relative; }
+        .notes-list-panel .notes-list .note-item:hover { background: var(--bg-elevated); border-color: var(--border-soft); }
+        .notes-list-panel .notes-list .note-item.active { background: var(--oxblood-soft); border-color: var(--oxblood); border-left: 3px solid var(--oxblood); }
+        .notes-list-panel .notes-list .note-item .note-title { font-family: var(--font-serif); font-size: 0.95rem; color: var(--ivory); margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 0.4rem; }
+        .notes-list-panel .notes-list .note-item .note-title .pin-icon { width: 12px; height: 12px; color: var(--gold); opacity: 0.6; }
+        .notes-list-panel .notes-list .note-item .note-preview { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .notes-list-panel .notes-list .note-item .note-meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .notes-list-panel .notes-list .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1.5rem; text-align: center; color: var(--text-muted); height: 100%; }
+        .notes-list-panel .notes-list .empty-state .empty-icon { width: 32px; height: 32px; opacity: 0.2; margin-bottom: 0.8rem; color: var(--gold); }
+        .notes-list-panel .notes-list .empty-state .empty-title { font-family: var(--font-serif); font-size: 1.2rem; color: var(--ivory); margin-bottom: 0.3rem; }
+        .notes-list-panel .notes-list .empty-state .empty-text { font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.6; max-width: 200px; line-height: 1.4; }
+
+        /* ===== NOTE EDITOR ===== */
+        .note-editor { flex: 1; display: flex; flex-direction: column; background: var(--bg-elevated); overflow: hidden; min-width: 0; transition: background 0.3s; }
+        
+        html.light .note-editor { background-image: repeating-linear-gradient(45deg, rgba(160, 140, 110, 0.01) 0px, rgba(160, 140, 110, 0.01) 2px, transparent 2px, transparent 6px); }
+
+        .note-editor .editor-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); text-align: center; padding: 2rem; }
+        .note-editor .editor-empty .empty-icon { width: 48px; height: 48px; opacity: 0.15; margin-bottom: 1rem; color: var(--gold); }
+        .note-editor .editor-empty .empty-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--ivory); margin-bottom: 0.3rem; cursor: pointer; transition: color var(--transition); }
+        .note-editor .editor-empty .empty-title:hover { color: var(--oxblood); }
+        .note-editor .editor-empty .empty-text { font-family: var(--font-mono); font-size: 0.8rem; opacity: 0.5; max-width: 280px; }
+        .note-editor .editor-empty .empty-action { margin-top: 1.5rem; padding: 0.8rem 2rem; background: var(--oxblood); color: var(--bg-void); border: 1px solid var(--oxblood-hover); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all var(--transition); display: flex; align-items: center; gap: 0.5rem; }
+        .note-editor .editor-empty .empty-action:hover { background: var(--oxblood-hover); transform: translateY(-1px); box-shadow: 0 4px 14px var(--shadow-strong); }
+
+        /* Active Editor */
+        .note-editor .editor-active { display: flex; flex-direction: column; height: 100%; }
+        .note-editor .editor-active .editor-body { flex: 1; padding: 2rem 2.5rem; overflow-y: auto; display: flex; flex-direction: column; }
+        .note-editor .editor-active .editor-body .note-title-input { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; color: var(--ivory); border: none; background: transparent; outline: none; padding: 0 0 0.5rem 0; margin-bottom: 0.5rem; width: 100%; border-bottom: 2px solid transparent; transition: border-color 0.2s; }
+        .note-editor .editor-active .editor-body .note-title-input::placeholder { color: var(--text-muted); opacity: 0.3; }
+        .note-editor .editor-active .editor-body .note-title-input:focus { border-bottom-color: var(--oxblood-soft); }
+        .note-editor .editor-active .editor-body .note-editor-textarea { flex: 1; font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.8; color: var(--ivory); border: none; background: transparent; outline: none; resize: none; padding: 0.5rem 0 0 0; width: 100%; min-height: 200px; }
+        .note-editor .editor-active .editor-body .note-editor-textarea::placeholder { color: var(--text-muted); opacity: 0.3; }
+
+        /* Meta Bar */
+        .note-editor .editor-active .editor-body .note-meta-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1rem; margin-top: 1rem; border-top: 1px solid var(--border-subtle); flex-shrink: 0; flex-wrap: wrap; }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-left { display: flex; align-items: center; gap: 1.5rem; }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-item { display: flex; align-items: center; gap: 0.3rem; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-item .label { opacity: 0.5; text-transform: uppercase; letter-spacing: 0.05em; }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-actions { display: flex; align-items: center; gap: 0.4rem; }
+        
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-actions .action-btn { background: var(--bg-surface); border: 1px solid var(--border-soft); cursor: pointer; width: 32px; height: 32px; border-radius: var(--radius-sm); color: var(--text-muted); transition: all var(--transition); display: flex; align-items: center; justify-content: center; }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-actions .action-btn svg { width: 14px; height: 14px; }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-actions .action-btn:hover { background: var(--oxblood-soft); border-color: var(--oxblood); color: var(--oxblood); }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-actions .action-btn.active { background: var(--oxblood-soft); border-color: var(--oxblood); color: var(--oxblood); }
+        .note-editor .editor-active .editor-body .note-meta-bar .meta-actions .action-btn.danger:hover { background: rgba(185, 130, 130, 0.1); border-color: #b98282; color: #b98282; box-shadow: none; }
+
+        .note-editor .editor-active .editor-body .note-meta-bar .save-status { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted-sage); text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            :root { --sidebar-width: 60px; }
+            .sidebar { padding: 1.5rem 0.5rem; align-items: center; }
+            .sidebar .sidebar-brand .logo { justify-content: center; }
+            .sidebar .sidebar-brand .logo .logo-text { display: none; }
+            .sidebar .sidebar-brand .logo .mark { font-size: 1.5rem; }
+            .sidebar .sidebar-brand .logo-sub { display: none; }
+            .sidebar-nav a { justify-content: center; padding: 0.8rem; }
+            .sidebar-nav a .nav-label-text, .sidebar-nav .nav-badge, .sidebar-nav .nav-label { display: none; }
+            .sidebar-nav a.active::after { display: none; }
+            .sidebar-footer a { justify-content: center; }
+            .sidebar-footer a span { display: none; }
+            .profile-avatar .avatar-name { display: none; }
+            .top-header .header-left .page-title .sub { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --sidebar-width: 0px; --notes-list-width: 100%; }
+            .sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; transform: translateX(-100%); padding: 2rem 1.5rem; box-shadow: 4px 0 24px var(--shadow-strong); z-index: 100; border-right: 1px solid var(--border-soft); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar .sidebar-brand .logo { justify-content: flex-start; }
+            .sidebar .sidebar-brand .logo .logo-text { display: inline; }
+            .sidebar .sidebar-brand .logo-sub { display: block; }
+            .sidebar-nav a { justify-content: flex-start; padding: 0.8rem; }
+            .sidebar-nav a .nav-label-text { display: inline; }
+            .sidebar-nav .nav-badge { display: inline; }
+            .sidebar-nav .nav-label { display: block; }
+            .sidebar-footer a { justify-content: flex-start; }
+            .sidebar-footer a span { display: inline; }
+            .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(41, 33, 29, 0.3); z-index: 99; backdrop-filter: blur(4px); }
+            .sidebar-overlay.active { display: block; }
+            .top-header .header-left .menu-toggle { display: block; }
+            .journal-workspace { flex-direction: column; }
+            .notes-list-panel { width: 100%; max-height: 45vh; border-right: none; border-bottom: 1px solid var(--border-soft); flex-shrink: 0; }
+            .note-editor { flex: 1; min-height: 55vh; }
+            .note-editor .editor-active .editor-body { padding: 1.5rem; }
+        }
+
+        /* ===== ACCESSIBILITY & SCROLLBAR ===== */
+        :focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; border-radius: 4px; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-void); }
+        ::-webkit-scrollbar-thumb { background: var(--bg-surface); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+        
+        html.light ::-webkit-scrollbar-track { background: var(--bg-void); }
+        html.light ::-webkit-scrollbar-thumb { background: #DCD0BB; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+            <div class="sidebar-inner">
+                <div class="sidebar-brand">
+                    <a href="#" class="logo">
+                        <span class="mark">✦</span>
+                        <span class="logo-text">VENUS</span>
+                    </a>
+                    <div class="logo-sub">editorial · connections</div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <div class="nav-label">Main</div>
+                    <a href="#"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span><span class="nav-label-text">Home</span></a>
+                    <a href="#"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg></span><span class="nav-label-text">Explore</span></a>
+                    <a href="#"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span><span class="nav-label-text">Interests</span><span class="nav-badge">3</span></a>
+                    <a href="#"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span><span class="nav-label-text">Messages</span><span class="nav-badge">2</span></a>
+                    <a href="#" class="active"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span><span class="nav-label-text">Journal</span></a>
+
+                    <div class="nav-label" style="margin-top:1rem;">Personal</div>
+                    <a href="#"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><span class="nav-label-text">Profile</span></a>
+                    <a href="#"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span><span class="nav-label-text">Settings</span></a>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg><span>Journal</span></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Support</span></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main-content" role="main">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+                    <div class="page-title">
+                        Journal
+                        <span class="sub">· a quiet place for your thoughts</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <!-- Theme Toggle -->
+                    <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle theme">
+                        <div class="toggle-icon" id="moonIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></div>
+                        <div class="toggle-icon" id="sunIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></div>
+                    </div>
+
+                    <!-- Notification Dropdown -->
+                    <div class="notif-wrapper">
+                        <button class="utility-btn" id="notifBtn" aria-label="Notifications">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                            <span class="dot"></span>
+                        </button>
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-header">
+                                <h4>Notifications</h4>
+                                <button class="mark-all">Mark all read</button>
+                            </div>
+                            <div class="notif-list">
+                                <div class="notif-item unread">
+                                    <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                                    <div class="notif-content">
+                                        <div class="notif-text"><strong>Sophie</strong> liked your profile. “Your writing is beautiful.”</div>
+                                        <div class="notif-time">2h ago</div>
+                                    </div>
+                                </div>
+                                <div class="notif-item unread">
+                                    <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                                    <div class="notif-content">
+                                        <div class="notif-text"><strong>Marcus</strong> sent a new message. “I’d love to hear more about your work.”</div>
+                                        <div class="notif-time">4h ago</div>
+                                    </div>
+                                </div>
+                                <div class="notif-item">
+                                    <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg></div>
+                                    <div class="notif-content">
+                                        <div class="notif-text"><strong>Clara</strong> accepted your connection request.</div>
+                                        <div class="notif-time">1d ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notif-footer">
+                                <a href="#">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="utility-btn" aria-label="Messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></button>
+                    
+                    <a href="#" class="profile-avatar" aria-label="Your profile">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23EDE1CC'/%3E%3Ccircle cx='40' cy='32' r='18' fill='%23B98282' opacity='0.5'/%3E%3Ccircle cx='40' cy='70' r='26' fill='%23B98282' opacity='0.3'/%3E%3C/svg%3E" alt="Your profile avatar" class="avatar-img" />
+                        <span class="avatar-name">Abheet</span>
+                    </a>
+                </div>
+            </header>
+
+            <!-- ===== JOURNAL WORKSPACE ===== -->
+            <div class="journal-workspace">
+                <aside class="notes-list-panel" aria-label="Notes list">
+                    <div class="notes-toolbar">
+                        <div class="search-wrapper">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="searchNotes" placeholder="Search notes..." aria-label="Search notes" />
+                        </div>
+                        <div class="filter-row">
+                            <button class="filter-chip active" data-filter="all">All</button>
+                            <button class="filter-chip" data-filter="pinned">Pinned</button>
+                            <button class="filter-chip" data-filter="recent">Recent</button>
+                            <button class="filter-chip" data-filter="archived">Archived</button>
+                            <button class="filter-chip new-note-btn" id="newNoteBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                New
+                            </button>
+                        </div>
+                    </div>
+                    <div class="notes-list" id="notesList"></div>
+                </aside>
+
+                <section class="note-editor" aria-label="Note editor">
+                    <div class="editor-empty" id="editorEmpty">
+                        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        <div class="empty-title" id="emptyNewNote">Nothing here yet</div>
+                        <div class="empty-text">Start with a thought, an idea, or anything you don't want to lose.</div>
+                        <button class="empty-action" id="emptyNewNoteBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            New note
+                        </button>
+                    </div>
+
+                    <div class="editor-active" id="editorActive" style="display:none;">
+                        <div class="editor-body">
+                            <input type="text" class="note-title-input" id="noteTitle" placeholder="Note title..." />
+                            <textarea class="note-editor-textarea" id="noteContent" placeholder="Write your thoughts here…"></textarea>
+                            <div class="note-meta-bar">
+                                <div class="meta-left">
+                                    <span class="meta-item"><span class="label">Last edited</span> <span id="lastEdited">just now</span></span>
+                                    <span class="meta-item"><span class="label">Words</span> <span id="wordCount">0</span></span>
+                                    <span class="save-status" id="saveStatus">Saved</span>
+                                </div>
+                                <div class="meta-actions">
+                                    <button class="action-btn" id="pinBtn" title="Pin note">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="22" x2="4" y2="15"></line><path d="M4 15a4 4 0 0 1 4-4h6l4-4 4 4-4 4v6a4 4 0 0 1-4 4H4z"></path></svg>
+                                    </button>
+                                    <button class="action-btn" id="archiveBtn" title="Archive note">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                                    </button>
+                                    <button class="action-btn danger" id="deleteBtn" title="Delete note">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ===== THEME TOGGLE =====
+            const themeToggle = document.getElementById('themeToggle');
+            const moonIcon = document.getElementById('moonIcon');
+            const sunIcon = document.getElementById('sunIcon');
+
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    document.documentElement.classList.add('light');
+                    moonIcon.classList.remove('active');
+                    sunIcon.classList.add('active');
+                } else {
+                    document.documentElement.classList.remove('light');
+                    moonIcon.classList.add('active');
+                    sunIcon.classList.remove('active');
+                }
+            }
+
+            // Default to Dark
+            setTheme('dark');
+
+            themeToggle.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('light')) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+
+            // ===== NOTIFICATION DROPDOWN =====
+            const notifBtn = document.getElementById('notifBtn');
+            const notifDropdown = document.getElementById('notifDropdown');
+
+            notifBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                notifDropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!notifDropdown.contains(e.target) && !notifBtn.contains(e.target)) {
+                    notifDropdown.classList.remove('active');
+                }
+            });
+
+            document.querySelector('.mark-all')?.addEventListener('click', () => {
+                document.querySelectorAll('.notif-item.unread').forEach(item => {
+                    item.classList.remove('unread');
+                });
+                document.querySelector('.utility-btn .dot').style.display = 'none';
+            });
+
+            // ===== DATA =====
+            let notes = [
+                { id: 1, title: 'First impressions', content: 'Venus feels different. The warm parchment tones, the quiet rhythm — it’s a space that invites reflection rather than reaction. I want to remember this feeling.', pinned: true, archived: false, updated: Date.now() - 3600000 * 2 },
+                { id: 2, title: 'Conversation with Elena', content: 'She mentioned she’s reading a collection of essays by Rebecca Solnit. I should look that up. There’s something about the way she describes the world — patient, curious, unhurried.', pinned: false, archived: false, updated: Date.now() - 3600000 * 12 },
+                { id: 3, title: 'Ideas for the weekend', content: '— Visit the botanical garden\n— Finish reading the new Murakami\n— Write that letter I’ve been putting off\n— Try the new café near the canal', pinned: false, archived: false, updated: Date.now() - 3600000 * 24 },
+                { id: 4, title: 'Notes on patience', content: 'Some connections are worth taking slowly. I keep coming back to this idea. It’s not about waiting — it’s about being present while something unfolds.', pinned: false, archived: true, updated: Date.now() - 3600000 * 72 },
+            ];
+
+            let currentNoteId = null;
+            let currentFilter = 'all';
+            let searchQuery = '';
+            let isDirty = false;
+            let saveTimeout = null;
+
+            // ===== DOM REFS =====
+            const notesListEl = document.getElementById('notesList');
+            const editorEmpty = document.getElementById('editorEmpty');
+            const editorActive = document.getElementById('editorActive');
+            const noteTitle = document.getElementById('noteTitle');
+            const noteContent = document.getElementById('noteContent');
+            const lastEdited = document.getElementById('lastEdited');
+            const wordCount = document.getElementById('wordCount');
+            const saveStatus = document.getElementById('saveStatus');
+            const searchInput = document.getElementById('searchNotes');
+            const pinBtn = document.getElementById('pinBtn');
+            const archiveBtn = document.getElementById('archiveBtn');
+            const deleteBtn = document.getElementById('deleteBtn');
+            const newNoteBtn = document.getElementById('newNoteBtn');
+            const emptyNewNote = document.getElementById('emptyNewNote');
+            const emptyNewNoteBtn = document.getElementById('emptyNewNoteBtn');
+
+            // ===== UTILITY =====
+            function formatDate(ts) {
+                const d = new Date(ts);
+                const now = new Date();
+                const diff = Math.floor((now - d) / 60000);
+                if (diff < 1) return 'just now';
+                if (diff < 60) return diff + 'm ago';
+                if (diff < 1440) return Math.floor(diff / 60) + 'h ago';
+                return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            }
+
+            function countWords(text) { return text.trim() ? text.trim().split(/\s+/).length : 0; }
+
+            function getFilteredNotes() {
+                let result = notes;
+                if (searchQuery.trim()) {
+                    const q = searchQuery.trim().toLowerCase();
+                    result = result.filter(n => n.title.toLowerCase().includes(q) || n.content.toLowerCase().includes(q));
+                }
+                if (currentFilter === 'pinned') result = result.filter(n => n.pinned && !n.archived);
+                else if (currentFilter === 'archived') result = result.filter(n => n.archived);
+                else if (currentFilter === 'recent') result = result.filter(n => !n.archived).sort((a, b) => b.updated - a.updated);
+                else result = result.filter(n => !n.archived);
+                
+                if (currentFilter !== 'archived' && currentFilter !== 'recent') {
+                    result = result.sort((a, b) => {
+                        if (a.pinned && !b.pinned) return -1;
+                        if (!a.pinned && b.pinned) return 1;
+                        return b.updated - a.updated;
+                    });
+                }
+                return result;
+            }
+
+            // ===== RENDER NOTES LIST =====
+            function renderNotesList() {
+                const filtered = getFilteredNotes();
+                if (filtered.length === 0) {
+                    notesListEl.innerHTML = `
+                        <div class="empty-state">
+                            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            <div class="empty-title">${searchQuery.trim() ? 'No matching notes' : 'No notes here'}</div>
+                            <div class="empty-text">${searchQuery.trim() ? 'Try a different search.' : 'Start by writing something.'}</div>
+                        </div>`;
+                    return;
+                }
+
+                let html = '';
+                filtered.forEach(n => {
+                    const isActive = n.id === currentNoteId;
+                    const preview = n.content.replace(/\n/g, ' ').slice(0, 60) + (n.content.length > 60 ? '…' : '');
+                    html += `
+                        <div class="note-item ${isActive ? 'active' : ''}" data-id="${n.id}">
+                            <div class="note-title">
+                                ${n.pinned ? '<svg class="pin-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg>' : ''}
+                                ${n.title || 'Untitled'}
+                            </div>
+                            <div class="note-preview">${preview || 'Empty note'}</div>
+                            <div class="note-meta">
+                                <span>${formatDate(n.updated)}</span>
+                                ${n.archived ? '<span style="opacity:0.4">· archived</span>' : ''}
+                            </div>
+                        </div>`;
+                });
+                notesListEl.innerHTML = html;
+
+                notesListEl.querySelectorAll('.note-item').forEach(el => {
+                    el.addEventListener('click', function() { selectNote(parseInt(this.dataset.id)); });
+                });
+            }
+
+            // ===== SELECT NOTE =====
+            function selectNote(id) {
+                const note = notes.find(n => n.id === id);
+                if (!note) return;
+                if (isDirty) saveCurrentNote();
+                currentNoteId = id;
+                editorEmpty.style.display = 'none';
+                editorActive.style.display = 'flex';
+                noteTitle.value = note.title;
+                noteContent.value = note.content;
+                
+                // Update button active states
+                pinBtn.classList.toggle('active', note.pinned);
+                archiveBtn.classList.toggle('active', note.archived);
+                
+                updateMeta(note);
+                renderNotesList();
+                isDirty = false;
+                saveStatus.textContent = 'Saved';
+            }
+
+            function updateMeta(note) {
+                if (!note) return;
+                lastEdited.textContent = formatDate(note.updated);
+                wordCount.textContent = countWords(note.content);
+            }
+
+            // ===== SAVE NOTE =====
+            function saveCurrentNote() {
+                if (currentNoteId === null) return;
+                const note = notes.find(n => n.id === currentNoteId);
+                if (!note) return;
+                const title = noteTitle.value.trim() || 'Untitled';
+                const content = noteContent.value;
+                if (note.title !== title || note.content !== content) {
+                    note.title = title;
+                    note.content = content;
+                    note.updated = Date.now();
+                    isDirty = false;
+                    saveStatus.textContent = 'Saved';
+                    updateMeta(note);
+                    renderNotesList();
+                }
+            }
+
+            function markDirty() {
+                if (!isDirty) { isDirty = true; saveStatus.textContent = 'Saving…'; }
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(saveCurrentNote, 800);
+            }
+
+            // ===== CREATE NEW NOTE =====
+            function createNewNote() {
+                if (isDirty) saveCurrentNote();
+                const newNote = { id: Date.now(), title: '', content: '', pinned: false, archived: false, updated: Date.now() };
+                notes.unshift(newNote);
+                currentNoteId = newNote.id;
+                editorEmpty.style.display = 'none';
+                editorActive.style.display = 'flex';
+                noteTitle.value = ''; noteContent.value = '';
+                pinBtn.classList.remove('active'); archiveBtn.classList.remove('active');
+                updateMeta(newNote);
+                renderNotesList();
+                isDirty = false;
+                saveStatus.textContent = 'Saved';
+                setTimeout(() => noteTitle.focus(), 50);
+            }
+
+            // ===== ACTIONS =====
+            function getCurrentNote() { return notes.find(n => n.id === currentNoteId); }
+
+            pinBtn.addEventListener('click', function() {
+                const note = getCurrentNote(); if (!note) return;
+                note.pinned = !note.pinned; pinBtn.classList.toggle('active', note.pinned);
+                renderNotesList(); markDirty(); saveCurrentNote();
+            });
+
+            archiveBtn.addEventListener('click', function() {
+                const note = getCurrentNote(); if (!note) return;
+                note.archived = !note.archived; archiveBtn.classList.toggle('active', note.archived);
+                if (note.archived && currentFilter !== 'archived') {
+                    currentNoteId = null; editorActive.style.display = 'none'; editorEmpty.style.display = 'flex';
+                }
+                renderNotesList(); markDirty(); saveCurrentNote();
+            });
+
+            deleteBtn.addEventListener('click', function() {
+                const note = getCurrentNote(); if (!note) return;
+                if (confirm('Delete this note?')) {
+                    notes = notes.filter(n => n.id !== currentNoteId);
+                    currentNoteId = null; editorActive.style.display = 'none'; editorEmpty.style.display = 'flex';
+                    renderNotesList(); isDirty = false;
+                }
+            });
+
+            noteTitle.addEventListener('input', markDirty);
+            noteContent.addEventListener('input', function() { markDirty(); wordCount.textContent = countWords(this.value); });
+
+            // ===== FILTERS & SEARCH =====
+            searchInput.addEventListener('input', function() { searchQuery = this.value; renderNotesList(); });
+            document.querySelectorAll('.filter-chip:not(.new-note-btn)').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-chip:not(.new-note-btn)').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    renderNotesList();
+                });
+            });
+
+            newNoteBtn.addEventListener('click', createNewNote);
+            emptyNewNote.addEventListener('click', createNewNote);
+            emptyNewNoteBtn.addEventListener('click', createNewNote);
+
+            // ===== SIDEBAR TOGGLE =====
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            function toggleSidebar() {
+                const isOpen = sidebar.classList.toggle('open');
+                overlay.classList.toggle('active', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
+
+            menuToggle.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = '';
+                }
+            });
+
+            // ===== INIT =====
+            const firstNote = notes.filter(n => !n.archived)[0];
+            if (firstNote) { selectNote(firstNote.id); } 
+            else if (notes.length > 0) { selectNote(notes[0].id); }
+            else { editorEmpty.style.display = 'flex'; editorActive.style.display = 'none'; }
+            renderNotesList();
+
+        });
+    </script>
+</body>
+</html>

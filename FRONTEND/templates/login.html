@@ -1,136 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Narrative · Sign In</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet" />
-  <!-- Shared CSS -->
-  <link rel="stylesheet" href="../static/form_style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venus · Sign in</title>
+
+    <!-- Google Fonts: Serif for romance, Monospace for the hacker vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="../static/form_style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <div class="auth-wrapper" role="main">
+    <div class="venus-auth" role="main">
 
-    <!-- ===== LEFT: EDITORIAL BRAND ===== -->
-    <div class="auth-brand">
-      <div class="brand-mark">
-        <span class="ornament">✦</span>
-        <span class="rule"></span>
-      </div>
+        <!-- ===== LEFT: BRAND & EDITORIAL ===== -->
+        <div class="venus-brand">
 
-      <h1>
-        Some connections<br />
-        are worth <span class="accent">taking slowly</span>.
-      </h1>
+            <!-- signature motif: offset rule -->
+            <div class="brand-motif">
+                <span class="motif-line"></span>
+                <span class="motif-dot"></span>
+            </div>
 
-      <p>
-        A space for thoughtful souls seeking meaningful encounters.
-        No algorithms, no urgency — just honest conversation.
-      </p>
+            <!-- wordmark -->
+            <div class="brand-wordmark">
+                <span class="wordmark-serif">V</span>
+                <span class="wordmark-serif">E</span>
+                <span class="wordmark-serif">N</span>
+                <span class="wordmark-serif">U</span>
+                <span class="wordmark-serif">S</span>
+                <span class="wordmark-mark">✦</span>
+            </div>
 
-      <div class="brand-quote">
-        “The best relationships begin with a pause.”
-        <span class="attribution">— Narrative Journal, 2026</span>
-      </div>
+            <!-- editorial statement -->
+            <h1 class="brand-statement">
+                Some connections<br />
+                are worth <span class="accent">taking slowly</span>.
+            </h1>
 
-      <div class="deco-line"></div>
+            <p class="brand-description">
+                A space for thoughtful souls seeking meaningful encounters.
+                No algorithms, no urgency — just honest conversation.
+            </p>
+
+            <!-- signature divider -->
+            <div class="brand-divider">
+                <span class="divider-line"></span>
+                <span class="divider-mark">✦</span>
+                <span class="divider-line"></span>
+            </div>
+
+        </div>
+
+        <!-- ===== RIGHT: AUTHENTICATION ===== -->
+        <div class="venus-auth-panel">
+
+            <!-- tab navigation -->
+            <div class="auth-tabs">
+                <span class="tab-active">Sign in</span>
+                <a href="signup.html" class="tab-inactive">Create account</a>
+            </div>
+
+            <!-- login form -->
+            <form class="auth-form" id="login-form" novalidate>
+
+                <div class="form-header">
+                    <h2>Welcome back</h2>
+                    <p>We missed you. Sign in to continue your story.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required />
+                        <button type="button" class="password-toggle" aria-label="Show password" data-target="login-password">
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <a href="#" class="forgot-link">Forgot password?</a>
+
+                <button type="submit" class="btn-primary">Sign in</button>
+
+                <div class="divider">
+                    <span class="line"></span>
+                    <span>or</span>
+                    <span class="line"></span>
+                </div>
+
+                <button type="button" class="btn-google" aria-label="Continue with Google">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="form-footer">
+                    Don't have an account? <a href="signup.html">Create one</a>
+                </div>
+
+                <!-- signature micro-detail -->
+                <div class="form-signature">
+                    <span class="sig-line"></span>
+                    <span class="sig-mark">✦</span>
+                    <span class="sig-line"></span>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 
-    <!-- ===== RIGHT: LOGIN PANEL ===== -->
-    <div class="auth-panel">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-      <div class="auth-tabs">
-        <span class="tab-active">Sign in</span>
-        <a href="signup.html" class="tab-inactive">Create account</a>
-      </div>
+            // ===== PASSWORD TOGGLE =====
+            document.querySelectorAll('.password-toggle').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const input = document.getElementById(targetId);
+                    if (!input) return;
+                    const isPassword = input.type === 'password';
+                    input.type = isPassword ? 'text' : 'password';
+                    this.textContent = isPassword ? 'Hide' : 'Show';
+                });
+            });
 
-      <form class="auth-form" id="login-form" novalidate>
-        <div class="form-header">
-          <h2>Welcome back</h2>
-          <p>We missed you. Sign in to continue your story.</p>
-        </div>
+            // ===== FORM SUBMIT =====
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Welcome back! (demo)');
+            });
 
-        <div class="input-group">
-          <label for="login-email">Email</label>
-          <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required />
-        </div>
+            // ===== GOOGLE BUTTON =====
+            document.querySelector('.btn-google').addEventListener('click', function() {
+                alert('Continue with Google (demo)');
+            });
 
-        <div class="input-group">
-          <label for="login-password">Password</label>
-          <div class="password-wrapper">
-            <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required />
-            <button type="button" class="password-toggle" aria-label="Show password" data-target="login-password">
-              Show
-            </button>
-          </div>
-        </div>
+            // ===== FORGOT PASSWORD =====
+            document.querySelector('.forgot-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Password reset link would be sent (demo)');
+            });
 
-        <a href="#" class="forgot-link">Forgot password?</a>
-
-        <button type="submit" class="btn-primary">Sign in</button>
-
-        <div class="divider">
-          <span class="line"></span>
-          <span>OR</span>
-          <span class="line"></span>
-        </div>
-
-        <button type="button" class="btn-google" aria-label="Continue with Google">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-          </svg>
-          Continue with Google
-        </button>
-
-        <div class="form-footer">
-          Don't have an account? <a href="signup.html">Create one</a>
-        </div>
-      </form>
-
-    </div>
-    <!-- /auth-panel -->
-  </div>
-  <!-- /auth-wrapper -->
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Password toggle
-      document.querySelectorAll('.password-toggle').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const targetId = this.dataset.target;
-          const input = document.getElementById(targetId);
-          if (!input) return;
-          const isPassword = input.type === 'password';
-          input.type = isPassword ? 'text' : 'password';
-          this.textContent = isPassword ? 'Hide' : 'Show';
         });
-      });
-
-      // Form submit demo
-      document.getElementById('login-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Sign in submitted (demo)');
-      });
-
-      // Google button demo
-      document.querySelector('.btn-google').addEventListener('click', function() {
-        alert('Continue with Google (demo)');
-      });
-
-      // Forgot password demo
-      document.querySelector('.forgot-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('Password reset link would be sent (demo)');
-      });
-    });
-  </script>
+    </script>
 
 </body>
 </html>

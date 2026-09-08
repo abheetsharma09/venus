@@ -1,184 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Narrative · Sign Up</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet" />
-  <!-- Shared CSS -->
-  <link rel="stylesheet" href="../static/form_style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Venus · Create account</title>
+
+    <!-- Google Fonts (Added JetBrains Mono for the tech vibe) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Shared CSS (Untouched as requested) -->
+    <link rel="stylesheet" href="../static/form_style.css" />
 </head>
 <body>
 
-  <div class="auth-wrapper" role="main">
+    <div class="venus-auth" role="main">
 
-    <!-- ===== LEFT: EDITORIAL BRAND ===== -->
-    <div class="auth-brand">
-      <div class="brand-mark">
-        <span class="ornament">✦</span>
-        <span class="rule"></span>
-      </div>
+        <!-- ===== LEFT: BRAND & EDITORIAL ===== -->
+        <div class="venus-brand">
 
-      <h1>
-        Some connections<br />
-        are worth <span class="accent">taking slowly</span>.
-      </h1>
+            <!-- signature motif -->
+            <div class="brand-motif">
+                <span class="motif-line"></span>
+                <span class="motif-dot"></span>
+            </div>
 
-      <p>
-        A space for thoughtful souls seeking meaningful encounters.
-        No algorithms, no urgency — just honest conversation.
-      </p>
+            <!-- wordmark -->
+            <div class="brand-wordmark">
+                <span class="wordmark-serif">V</span>
+                <span class="wordmark-serif">E</span>
+                <span class="wordmark-serif">N</span>
+                <span class="wordmark-serif">U</span>
+                <span class="wordmark-serif">S</span>
+                <span class="wordmark-mark">✦</span>
+            </div>
 
-      <div class="brand-quote">
-        “The best relationships begin with a pause.”
-        <span class="attribution">— Narrative Journal, 2026</span>
-      </div>
+            <!-- editorial statement -->
+            <h1 class="brand-statement">
+                Begin something<br />
+                <span class="accent">meaningful</span>.
+            </h1>
 
-      <div class="deco-line"></div>
+            <p class="brand-description">
+                Join a community of thoughtful souls.
+                Start your story here.
+            </p>
+
+            <!-- signature divider -->
+            <div class="brand-divider">
+                <span class="divider-line"></span>
+                <span class="divider-mark">✦</span>
+                <span class="divider-line"></span>
+            </div>
+
+        </div>
+
+        <!-- ===== RIGHT: SIGN-UP PANEL ===== -->
+        <div class="venus-auth-panel">
+
+            <!-- tab navigation -->
+            <div class="auth-tabs">
+                <a href="login.html" class="tab-inactive">Sign in</a>
+                <span class="tab-active">Create account</span>
+            </div>
+
+            <!-- sign-up form -->
+            <!-- FIX: Changed action="POST" to method="POST" and added a valid action URL -->
+            <form method="POST" action="http://127.0.0.1:8000/api/post/users/profile" class="auth-form" id="signup-form" novalidate>
+
+                <div class="form-header">
+                    <h2>Begin something meaningful</h2>
+                    <p>Join a community of thoughtful souls. Start your story here.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" placeholder="Your name" autocomplete="name" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required />
+                </div>
+
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-password" placeholder="••••••••" autocomplete="new-password" required />
+                        <button type="button" class="password-toggle" aria-label="Show password" data-target="signup-password">
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="signup-confirm">Confirm password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-confirm" placeholder="••••••••" autocomplete="new-password" required />
+                        <button type="button" class="password-toggle" aria-label="Show password" data-target="signup-confirm">
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <!-- password requirements -->
+                <div class="password-requirements" id="pw-reqs" role="list">
+                    <span class="req" data-req="length" role="listitem">
+                        <span class="dot"></span> 8+ characters
+                    </span>
+                    <span class="req" data-req="lower" role="listitem">
+                        <span class="dot"></span> lowercase
+                    </span>
+                    <span class="req" data-req="upper" role="listitem">
+                        <span class="dot"></span> uppercase
+                    </span>
+                    <span class="req" data-req="number" role="listitem">
+                        <span class="dot"></span> number
+                    </span>
+                </div>
+
+                <button type="submit" class="btn-primary">Create account</button>
+
+                <div class="divider">
+                    <span class="line"></span>
+                    <span>or</span>
+                    <span class="line"></span>
+                </div>
+
+                <button type="button" class="btn-google" aria-label="Continue with Google">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="form-footer">
+                    Already have an account? <a href="login.html">Sign in</a>
+                </div>
+
+                <!-- signature micro-detail -->
+                <div class="form-signature">
+                    <span class="sig-line"></span>
+                    <span class="sig-mark">✦</span>
+                    <span class="sig-line"></span>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 
-    <!-- ===== RIGHT: SIGN-UP PANEL ===== -->
-    <div class="auth-panel">
+    <script>
+        // 1. Fixed sendProfileData function
+        async function sendProfileData() {
+            // Grab the input elements from the HTML DOM
+            const nameInput = document.getElementById("signup-name");
+            const emailInput = document.getElementById("signup-email");
+            const passwordInput = document.getElementById("signup-password");
 
-      <div class="auth-tabs">
-        <a href="login.html" class="tab-inactive">Sign in</a>
-        <span class="tab-active">Create account</span>
-      </div>
+            // Extract values and clean up whitespaces
+            const payload = {
+                name: nameInput.value.trim(), // Fixed: was parseInt(...)
+                email: emailInput.value.trim(),
+                password: passwordInput.value.trim()
+            };
 
-      <form class="auth-form" id="signup-form" novalidate>
-        <div class="form-header">
-          <h2>Begin something meaningful</h2>
-          <p>Join a community of thoughtful souls. Start your story here.</p>
-        </div>
+            // Simple client-side validation to prevent sending empty/null values
+            // Fixed: checking the correct payload properties
+            if (!payload.name || !payload.email || !payload.password) {
+                console.error("Validation failed: All fields are required.");
+                alert("Please fill out all fields correctly.");
+                return;
+            }
 
-        <div class="input-group">
-          <label for="signup-name">Name</label>
-          <input type="text" id="signup-name" placeholder="Your name" autocomplete="name" required />
-        </div>
+            try {
+                // 4. Send the POST request to your FastAPI backend
+                const response = await fetch("http://127.0.0.1:8000/api/post/users/profile", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json" // Crucial for passing Pydantic validation
+                    },
+                    body: JSON.stringify(payload) // Converts the JS object into a valid JSON string
+                });
 
-        <div class="input-group">
-          <label for="signup-email">Email</label>
-          <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required />
-        </div>
+                // 5. Handle the server response
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Success:", data);
+                    alert("Profile data saved successfully!");
+                } else {
+                    const errorData = await response.json();
+                    console.error("Server Error (422/400/500):", errorData);
+                    alert(`Error: ${errorData.detail?.[0]?.msg || "Failed to save profile"}`);
+                }
+            } catch (error) {
+                // Catch networking errors (e.g., PostgreSQL server down, wrong port)
+                console.error("Network Error:", error);
+                alert("Could not connect to the API server.");
+            }
+        }
 
-        <div class="input-group">
-          <label for="signup-password">Password</label>
-          <div class="password-wrapper">
-            <input type="password" id="signup-password" placeholder="••••••••" autocomplete="new-password" required />
-            <button type="button" class="password-toggle" aria-label="Show password" data-target="signup-password">
-              Show
-            </button>
-          </div>
-        </div>
+        document.addEventListener('DOMContentLoaded', function() {
 
-        <div class="input-group">
-          <label for="signup-confirm">Confirm password</label>
-          <div class="password-wrapper">
-            <input type="password" id="signup-confirm" placeholder="••••••••" autocomplete="new-password" required />
-            <button type="button" class="password-toggle" aria-label="Show password" data-target="signup-confirm">
-              Show
-            </button>
-          </div>
-        </div>
+            // ===== PASSWORD TOGGLE =====
+            document.querySelectorAll('.password-toggle').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const input = document.getElementById(targetId);
+                    if (!input) return;
+                    const isPassword = input.type === 'password';
+                    input.type = isPassword ? 'text' : 'password';
+                    this.textContent = isPassword ? 'Hide' : 'Show';
+                });
+            });
 
-        <!-- Password requirements -->
-        <div class="password-requirements" id="pw-reqs" role="list">
-          <span class="req" data-req="length" role="listitem">
-            <span class="dot"></span> 8+ characters
-          </span>
-          <span class="req" data-req="lower" role="listitem">
-            <span class="dot"></span> lowercase
-          </span>
-          <span class="req" data-req="upper" role="listitem">
-            <span class="dot"></span> uppercase
-          </span>
-          <span class="req" data-req="number" role="listitem">
-            <span class="dot"></span> number
-          </span>
-        </div>
+            // ===== PASSWORD REQUIREMENTS =====
+            const pwInput = document.getElementById('signup-password');
+            const reqs = document.querySelectorAll('#pw-reqs .req');
 
-        <button type="submit" class="btn-primary">Create account</button>
+            function checkPassword(val) {
+                const checks = {
+                    length: val.length >= 8,
+                    lower: /[a-z]/.test(val),
+                    upper: /[A-Z]/.test(val),
+                    number: /\d/.test(val)
+                };
+                reqs.forEach(el => {
+                    const key = el.dataset.req;
+                    const met = checks[key] || false;
+                    el.classList.toggle('met', met);
+                });
+            }
 
-        <div class="divider">
-          <span class="line"></span>
-          <span>OR</span>
-          <span class="line"></span>
-        </div>
+            if (pwInput) {
+                pwInput.addEventListener('input', function() {
+                    checkPassword(this.value);
+                });
+                if (pwInput.value) checkPassword(pwInput.value);
+            }
 
-        <button type="button" class="btn-google" aria-label="Continue with Google">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-          </svg>
-          Continue with Google
-        </button>
+            // ===== FORM SUBMIT =====
+            // Fixed: Made the handler async and actually calling sendProfileData()
+            document.getElementById('signup-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                await sendProfileData();
+            });
 
-        <div class="form-footer">
-          Already have an account? <a href="login.html">Sign in</a>
-        </div>
-      </form>
+            // ===== GOOGLE BUTTON =====
+            document.querySelector('.btn-google').addEventListener('click', function() {
+                alert('Continue with Google (demo)');
+            });
 
-    </div>
-    <!-- /auth-panel -->
-  </div>
-  <!-- /auth-wrapper -->
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Password toggle
-      document.querySelectorAll('.password-toggle').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const targetId = this.dataset.target;
-          const input = document.getElementById(targetId);
-          if (!input) return;
-          const isPassword = input.type === 'password';
-          input.type = isPassword ? 'text' : 'password';
-          this.textContent = isPassword ? 'Hide' : 'Show';
         });
-      });
-
-      // Password requirements
-      const pwInput = document.getElementById('signup-password');
-      const reqs = document.querySelectorAll('#pw-reqs .req');
-
-      function checkPassword(val) {
-        const checks = {
-          length: val.length >= 8,
-          lower: /[a-z]/.test(val),
-          upper: /[A-Z]/.test(val),
-          number: /\d/.test(val)
-        };
-        reqs.forEach(el => {
-          const key = el.dataset.req;
-          const met = checks[key] || false;
-          el.classList.toggle('met', met);
-        });
-      }
-
-      if (pwInput) {
-        pwInput.addEventListener('input', function() {
-          checkPassword(this.value);
-        });
-        if (pwInput.value) checkPassword(pwInput.value);
-      }
-
-      // Form submit demo
-      document.getElementById('signup-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Account created (demo)');
-      });
-
-      // Google button demo
-      document.querySelector('.btn-google').addEventListener('click', function() {
-        alert('Continue with Google (demo)');
-      });
-    });
-  </script>
+    </script>
 
 </body>
 </html>

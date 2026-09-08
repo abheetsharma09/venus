@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bury a Project UI</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #2b3a1a; /* Dark grassy green backdrop from the reel */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container Card */
+        .modal-card {
+            background-color: #dfc38d; /* Exact warm wooden-tan color */
+            border: 3px solid #140d07; /* Dark structural outline */
+            border-radius: 12px;
+            width: 100%;
+            max-width: 580px;
+            padding: 24px;
+            box-shadow: inset -4px -4px 0px #cbb07a, 0 12px 24px rgba(0,0,0,0.4);
+            position: relative;
+            color: #140d07;
+        }
+
+        /* Header Layout */
+        .modal-header {
+            margin-bottom: 16px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4e3f2d;
+        }
+
+        /* ESC Badge */
+        .esc-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            border: 2px solid #140d07;
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: 12px;
+            background-color: transparent;
+        }
+
+        /* Input Elements */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            color: #3b2f21;
+            margin-bottom: 6px;
+            text-transform: capitalize;
+        }
+
+        /* Custom Inner Inputs to match screenshot styling */
+        .input-box {
+            width: 100%;
+            background-color: #dfc38d; /* Matches background */
+            border: 2px solid #6b563f; /* Muted inner dividers */
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 13px;
+            color: #140d07;
+            outline: none;
+            resize: none;
+        }
+
+        .input-box:focus {
+            border-color: #140d07;
+        }
+
+        /* Specific sizing matching the inputs */
+        .input-single {
+            height: 42px;
+        }
+
+        .input-textarea-short {
+            height: 64px;
+        }
+
+        .input-textarea-long {
+            height: 120px;
+            line-height: 1.5;
+        }
+
+        /* Footer Row */
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Buttons styling */
+        .btn {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn-cancel {
+            background-color: transparent;
+            border: 2px solid #4e3f2d;
+            color: #4e3f2d;
+        }
+
+        .btn-cancel:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-submit {
+            background-color: #e5b331; /* Bright yellow action color */
+            border: 2px solid #140d07;
+            color: #140d07;
+            box-shadow: inset -2px -2px 0px #be911b;
+        }
+
+        .btn-submit:hover {
+            background-color: #f3c242;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-card">
+        <div class="esc-badge">ESC</div>
+        
+        <div class="modal-header">
+            <h2 class="modal-title">Bury a project</h2>
+            <p class="modal-subtitle">It drops a grave at your current camera center.</p>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="input-box input-single" value="unfeed">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Idea</label>
+            <textarea class="input-box input-textarea-short">Show people how much life they're losing to scrolling</textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Details (optional)</label>
+            <textarea class="input-box input-textarea-long">Filters like "Life lost"
+Example: "You spent 2h today -> that's 30 days/year -> 3.5 years in 30 years"
+Add a visual like a shrinking life bar or character aging
+Could gamify quitting habits</textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn btn-cancel">Cancel</button>
+            <button class="btn btn-submit">Bury project</button>
+        </div>
+    </div>
+
+</body>
+</html>
