@@ -1,11 +1,12 @@
 from pydantic import BaseModel , EmailStr, Field
+from typing import Optional
 
 class UsersSignIN(BaseModel):
     name :str = Field(...)
-    email : EmailStr
+    email : EmailStr = Field(...)
     password : str = Field(...)
-    retypePass :str 
-    is_active : bool = True
+    retypePass :Optional[str] 
+    is_active : Optional[bool] = True
 
 class UsersSignIN_response(BaseModel):
     id : int
